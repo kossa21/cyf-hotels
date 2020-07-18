@@ -37,8 +37,8 @@ create table students (
 INSERT INTO student (name, address, age) VALUES ('Thiago Luiz Pereira','Carrer dAvinyó','28');
 insert into student (name, address, city, postcode, age ) values ('Anandamaya', 'Av Sant Ildefons', 'Cornella de Llobregat', '08940', 25);
 INSERT INTO student (name, address , city, postcode,age ) VALUES ('Akond', 'C Riereta 32', 'Barcelona', 08001, 31 );
-insert into student(name,age,address,city,postcode) values('Alejandro Sanchez',24,'Cornella','Cornella','08940');
-insert into student  (name, address, city, postcode, age) values ('Rubén', 'Corséga 416', 'Barcelona', 08037, 29);
+insert into student (name,age,address,city,postcode) values('Alejandro Sanchez',24,'Cornella','Cornella','08940');
+insert into student (name, address, city, postcode, age) values ('Rubén', 'Corséga 416', 'Barcelona', 08037, 29);
 INSERT INTO student (name,age,address, city, postcode) VALUES ('roshan',25,'glories','Barcelona', '333');
 INSERT INTO student (name,age,address, city, postcode) VALUES ('lavinia loredana', 35,'rossello 432','Barcelona', '08237');
 insert into student (name, address , city, postcode, age) values ('Umit Selahattin Oner', 'Carrer Canyelles', 'Tarragona', '43003', 32);
@@ -73,6 +73,8 @@ create table classes (
 insert into classes (leading_mentor_id , topic , class_location, class_date) values (1, 'Welcoming', 'Glovo Offices', '2019-10-25');
 insert into classes (leading_mentor_id , topic , class_location, class_date ) values (2, 'Javascript', 'Remote', '2020-07-18');
 
+select * from classes c ;
+
 --Exercise 10
 --We now want to store who among the students attends a specific class. 
 --How would you store that? Come up with a solution and insert some data 
@@ -84,8 +86,32 @@ create table attendances (
 	student_id		int
 );
 
-insert into attendances (class_id , student_id ) values (1, 2);
 insert into attendances (class_id , student_id ) values (2, 3);
+insert into attendances (class_id , student_id ) values (1, 4);
 
+select * from attendances a ;
+
+--Exercise 11
+--Answer the following questions using a select SQL statement:
+
+--Retrieve all the mentors who lived more than 5 years in Barcelona
+select * from mentors where years_in_bcn > 5;
+
+--Retrieve all the mentors whose favourite language is Javascript
+select * from mentors where upper(fav_language) = 'JAVASCRIPT';
+
+--Retrieve all the students under 25 years old
+select * from student s where age < 25;
+
+--Retrieve all the classes taught before June this year
+select * from classes c where class_date < '2020-06-01';
+
+--Retrieve all the students (retrieving student ids only is fine) who attended the Javascript class (or any other class that you have in the classes table).
+select student_id from attendances a where class_id = 2;
+
+select * from classes c where class_id = 2;
+
+--Provide all the students NOT living in Barcelona which postcode start with 08
+select * from student where city != 'Barcelona' and postcode like '08%';
 
 
